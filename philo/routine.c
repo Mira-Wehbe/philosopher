@@ -22,48 +22,86 @@ void smart_sleep(t_simulation *sim,size_t duration)
   elapsed=0;
   while(elapsed < duration)
   {
-    if(sim->stop ==0)
+    if(should_stop(sim))
       break;
-    usleep(500);
+    usleep(1000);
     currenttime = get_time();
     elapsed =currenttime - starttime;
   }
 }
 
-void	take_forks(t_philo *philo)
+void take_forks(t_philo *philo)
 {
-	int	left;
-	int	right;
-	int	first;
-	int	second;
-
-	left = philo->id;
-	right = (philo->id + 1) % philo->simul->num_of_philos;
-	if (left < right)
-	{
-		first = left;
-		second = right;
-	}
-	else
-	{
-		first = right;
-		second = left;
-	}
-	pthread_mutex_lock(&philo->simul->forks[first]);
-	printf("%zu %d has taken a fork\n",
-		get_time() - philo->simul->start_time, philo->id + 1);
-	pthread_mutex_lock(&philo->simul->forks[second]);
-	printf("%zu %d has taken a fork\n",
-		get_time() - philo->simul->start_time, philo->id + 1);
+  if (philo->id == philo->simul->num_of_philos - 1)
+  {
+    pthread_mutex_lock(philo->right_fork);
+    safe_print(philo->simul, philo->id + 1, "has taken a fork");
+    if (should_stop(philo->simul))
+    {
+      pthread_mutex_unlock(philo->right_fork);
+      return;
+    }
+    pthread_mutex_lock(philo->left_fork);
+    safe_print(philo->simul, philo->id + 1, "has taken a fork");
+    }
+    else
+    {
+      pthread_mutex_lock(philo->left_fork);
+      safe_print(philo->simul, philo->id + 1, "has taken a fork");
+      if (should_stop(philo->simul))
+      {
+        pthread_mutex_unlock(philo->left_fork);
+        return;
+      }
+      pthread_mutex_lock(philo->right_fork);
+      safe_print(philo->simul, philo->id + 1, "has taken a fork");
+    }
 }
 
 void put_forks(t_philo *philo)
 {
+  pthread_mutex_unlock(philo->left_fork);
+  pthread_mutex_unlock(philo->right_fork);
+}
+
+void get_fork_order(t_philo *philo, int *first, int *second)
+{
   int left;
   int right;
-
+    
   left = philo->id;
-  right=(philo->id+1) % philo->simul->num_of_philos;
-  pthread_mutex_unlock(&philo->simul->forks[left]);
-  pthread_mutex_unlock(&philo->simul->forks[right]);
+  right = (philo->id + 1) % philo->simul->num_of_philos;
+
+  if (left < right)
+  {
+    *first = left;
+    *second = right;
+  }
+  else
+  {
+    *first = right;
+    *second = left;
+  }
+}
+
+void *philosopher_routine(void *arg)
+{
+  t_philo *philo;
+
+  philo = (t_philo *)arg;
+  if (philo->id % 2 == 1)
+    usleep(1000); 
+  while (!should_stop(philo->simul))
+  {
+    if (should_stop(philo->simul))
+      break;
+    eat(philo);
+    if (should_stop(philo->simul))
+      break;
+    sleep_philo(philo);
+    if (should_stop(philo->simul))
+      break;
+    think(philo);
+  }
+  return (NULL);
 }

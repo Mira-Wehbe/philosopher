@@ -43,6 +43,8 @@ typedef struct s_simulation
   long long start_time;
   pthread_mutex_t *forks;
   pthread_mutex_t print_lock;
+  pthread_mutex_t stop_lock;
+  pthread_mutex_t meal_lock;
   t_philo *philos;
 }t_simulation;
 
@@ -64,6 +66,22 @@ void	eat(t_philo *philo);
 void sleep_philo(t_philo *philo);
 void think(t_philo *philo);
 size_t get_time(void);
-
+void *philosopher_routine(void *arg);
+void get_fork_order(t_philo *philo, int *first, int *second);
+int should_stop(t_simulation *sim);
+void set_stop(t_simulation *sim);
+long long get_last_meal(t_philo *philo);
+void set_last_meal(t_philo *philo, long long time);
+void safe_print(t_simulation *sim, int philo_id, char *message);
+int check_philosopher_death(t_simulation *sim);
+int check_all_eaten(t_simulation *sim);
+void *monitor_routine(void *arg);
+void *single_philosopher_routine(void *arg);
+int initialize_simulation(t_simulation *sim, int argc, char **argv);
+int handle_single_philosopher(t_simulation *sim);
+int handle_multiple_philosophers(t_simulation *sim);
+int wait_and_cleanup(t_simulation *sim, pthread_t monitor_thread);
+int create_monitor_thread(t_simulation *sim, pthread_t *monitor_thread);
+int create_philosopher_threads(t_simulation *sim);
 
 #endif
