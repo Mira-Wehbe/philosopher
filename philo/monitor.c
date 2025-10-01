@@ -12,6 +12,24 @@
 
 #include "philo.h"
 
+void smart_sleep(t_simulation *sim,size_t duration)
+{
+  size_t starttime;
+  size_t currenttime;
+  size_t elapsed;
+
+  starttime =get_time();
+  elapsed=0;
+  while(elapsed < duration)
+  {
+    if(should_stop(sim))
+      break;
+    usleep(1000);
+    currenttime = get_time();
+    elapsed =currenttime - starttime;
+  }
+}
+
 int check_philosopher_death(t_simulation *sim)
 {
   size_t current_time;

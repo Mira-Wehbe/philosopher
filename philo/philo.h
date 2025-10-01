@@ -67,7 +67,7 @@ void sleep_philo(t_philo *philo);
 void think(t_philo *philo);
 size_t get_time(void);
 void *philosopher_routine(void *arg);
-void get_fork_order(t_philo *philo, int *first, int *second);
+//void get_fork_order(t_philo *philo, int *first, int *second);
 int should_stop(t_simulation *sim);
 void set_stop(t_simulation *sim);
 long long get_last_meal(t_philo *philo);
