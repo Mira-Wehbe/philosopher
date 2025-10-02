@@ -12,64 +12,56 @@
 
 #include "philo.h"
 
-static void take_forks_last_philo(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
-  pthread_mutex_lock(philo->right_fork);
-  safe_print(philo->simul, philo->id + 1, "has taken a fork");
-  if (should_stop(philo->simul))
-  {
-    pthread_mutex_unlock(philo->right_fork);
-    return;
-  }
-  pthread_mutex_lock(philo->left_fork);
-  safe_print(philo->simul, philo->id + 1, "has taken a fork");
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
+
+	if (philo->left_fork < philo->right_fork)
+	{
+		first_fork = philo->left_fork;
+		second_fork = philo->right_fork;
+	}
+	else
+	{
+		first_fork = philo->right_fork;
+		second_fork = philo->left_fork;
+	}
+	pthread_mutex_lock(first_fork);
+	safe_print(philo->simul, philo->id + 1, "has taken a fork");
+	if (should_stop(philo->simul))
+	{
+		pthread_mutex_unlock(first_fork);
+		return ;
+	}
+	pthread_mutex_lock(second_fork);
+	safe_print(philo->simul, philo->id + 1, "has taken a fork");
 }
 
-static void take_forks_regular_philo(t_philo *philo)
+void	put_forks(t_philo *philo)
 {
-  pthread_mutex_lock(philo->left_fork);
-  safe_print(philo->simul, philo->id + 1, "has taken a fork");
-  if (should_stop(philo->simul))
-  {
-    pthread_mutex_unlock(philo->left_fork);
-    return;
-  }
-  pthread_mutex_lock(philo->right_fork);
-  safe_print(philo->simul, philo->id + 1, "has taken a fork");
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 
-void take_forks(t_philo *philo)
+void	*philosopher_routine(void *arg)
 {
-  if (philo->id == philo->simul->num_of_philos - 1)
-    take_forks_last_philo(philo);
-  else
-    take_forks_regular_philo(philo);
-}
+	t_philo	*philo;
 
-void put_forks(t_philo *philo)
-{
-  pthread_mutex_unlock(philo->left_fork);
-  pthread_mutex_unlock(philo->right_fork);
-}
-
-void *philosopher_routine(void *arg)
-{
-  t_philo *philo;
-
-  philo = (t_philo *)arg;
-  if (philo->id % 2 == 1)
-    usleep(1000); 
-  while (!should_stop(philo->simul))
-  {
-    if (should_stop(philo->simul))
-      break;
-    eat(philo);
-    if (should_stop(philo->simul))
-      break;
-    sleep_philo(philo);
-    if (should_stop(philo->simul))
-      break;
-    think(philo);
-  }
-  return (NULL);
+	philo = (t_philo *)arg;
+	if (philo->id % 2 == 1)
+		usleep(1000);
+	while (!should_stop(philo->simul))
+	{
+		if (should_stop(philo->simul))
+			break ;
+		eat(philo);
+		if (should_stop(philo->simul))
+			break ;
+		sleep_philo(philo);
+		if (should_stop(philo->simul))
+			break ;
+		think(philo);
+	}
+	return (NULL);
 }
