@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miwehbe <miwehbe@student.42beirut.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 15:33:25 by miwehbe           #+#    #+#             */
-/*   Updated: 2025/08/22 15:33:25 by miwehbe          ###   ########.fr       */
+/*   Created: 2025/11/11 20:38:52 by miwehbe           #+#    #+#             */
+/*   Updated: 2025/11/11 20:38:54 by miwehbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	eat(t_philo *philo)
 {
 	if (should_stop(philo->simul))
 		return ;
-	take_forks(philo);
+	if (!take_forks(philo))
+		return ;
 	if (should_stop(philo->simul))
 	{
 		put_forks(philo);
@@ -41,9 +42,12 @@ void	sleep_philo(t_philo *philo)
 
 void	think(t_philo *philo)
 {
-	if (should_stop(philo->simul))
+	t_simulation	*sim;
+
+	sim = philo->simul;
+	if (should_stop(sim))
 		return ;
-	safe_print(philo->simul, philo->id + 1, "is thinking");
-	if (philo->simul->num_of_philos % 2 == 1)
+	safe_print(sim, philo->id + 1, "is thinking");
+	if (sim->num_of_philos % 2 == 1)
 		usleep(1000);
 }

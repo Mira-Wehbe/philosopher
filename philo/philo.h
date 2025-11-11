@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: miwehbe <miwehbe@student.42beirut.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 16:11:17 by miwehbe           #+#    #+#             */
-/*   Updated: 2025/08/21 16:11:17 by miwehbe          ###   ########.fr       */
+/*   Created: 2025/11/11 20:38:43 by miwehbe           #+#    #+#             */
+/*   Updated: 2025/11/11 20:38:45 by miwehbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	destroy_simulation(t_simulation *sim);
 void	smart_sleep(t_simulation *sim, size_t duration);
 size_t	get_time(void);
 
-void	take_forks(t_philo *philo);
+int		take_forks(t_philo *philo);
 void	put_forks(t_philo *philo);
 void	eat(t_philo *philo);
 void	sleep_philo(t_philo *philo);

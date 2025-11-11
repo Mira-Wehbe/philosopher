@@ -6,7 +6,7 @@
 /*   By: miwehbe <miwehbe@student.42beirut.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:32:31 by miwehbe           #+#    #+#             */
-/*   Updated: 2025/08/20 18:32:31 by miwehbe          ###   ########.fr       */
+/*   Updated: 2025/11/11 21:15:41 by miwehbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,3 +101,11 @@ int	create_monitor_thread(t_simulation *sim, pthread_t *monitor_thread)
 	}
 	return (1);
 }
+
+/*
+.create philo:btkhl2 thread la philo wbinfz philo routine 
+create philo btmasel hayet lphilo kl wehd endu thread wkl wehd bym cycle khas fi ynem yekul yfkr aded thread= 3aded philo
+.create monit:btkhl;2 thread wehd monitor yra2b
+monitor bi ra2b kl philo bishuf ize hade met ize klun aklu aded lmeal ize sar fi shi men ltnen byem set stop
+
+*/

@@ -6,7 +6,7 @@
 /*   By: miwehbe <miwehbe@student.42beirut.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 18:31:48 by miwehbe           #+#    #+#             */
-/*   Updated: 2025/08/20 18:31:48 by miwehbe          ###   ########.fr       */
+/*   Updated: 2025/11/11 21:00:50 by miwehbe          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,3 +108,13 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+
+/*
+.initialize hiye ms2ule ene tjhz abl ma nblsh bteml cal la init-sim btshuf ize amle arg sah whk ,init_philo btrbt kl philo bl frk whk
+.handle single:btkhl2 thread jdid lal philo,wthread jdid yshuf ise fi hade net
+join btntr lthread l khl2te ta tkhls ,
+.handle multi:mtl handle single bnkhl2 thread (create_philo:btkhl2 thread la kl philo)
+wbtkhl2 thread monitor yr2b ize fshl khl2 monitor byntur ta ykhlsu khl2 thread te3un philo wb w2f(ta ma hata ma y3l2)
+.main:btjm3un ize philo wehd bt3yt handle single(btkhl2 thread lal philo,thread monitor wbtshuf sh8l)
+ize aktr mn wehd bt3yt handle multiple
+*/
