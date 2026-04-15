@@ -9,7 +9,7 @@ Each philosopher is a thread, forks are mutexes , and if you don't handle things
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
 
 # Example:
-```bash 
+```bash
 # No one should die
 ./philo 5 800 200 200
 
@@ -47,5 +47,5 @@ Forks are protected with mutexes so two philosophers can't grab the same fork at
 
 # Notes
 I used AI a bit just to understand some concepts like data races and deadlocks.
-
+---
 "It works. Nobody dies. I'm not touching it again."
