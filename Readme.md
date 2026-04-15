@@ -31,10 +31,10 @@ Each philosopher runs in a loop: think ->take forks -> eat -> sleep -> repeat
 Forks are protected with mutexes so two philosophers can't grab the same fork at the same time. A separate monitor thread checks whether any philosopher has gone too long without eating ,if they hit time_to_die, it prints the death and stops everything.
 
 # What was hard
-. Avoiding deadlocks.
-. Timing  everything is in ms, small delays matter.
-. Making sure no two messages print at the same time.
-. Debugging threads.
+- Avoiding deadlocks.
+- Timing  everything is in ms, small delays matter.
+- Making sure no two messages print at the same time.
+- Debugging threads.
 
 # Resources
 
