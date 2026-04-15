@@ -47,5 +47,7 @@ Forks are protected with mutexes so two philosophers can't grab the same fork at
 
 # Notes
 I used AI a bit just to understand some concepts like data races and deadlocks.
+
 ---
+
 "It works. Nobody dies. I'm not touching it again."
