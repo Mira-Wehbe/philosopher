@@ -37,12 +37,13 @@ Forks are protected with mutexes so two philosophers can't grab the same fork at
 . Debugging threads.
 
 # Resources
-. man - pthread_create : creating threads
-. man - pthread_mutex_lock : locking and unlocking mutexes
-. man - gettimeofday : getting the current time in microseconds
-. man - usleep : sleeping for microseconds
-. Dining Philosophers Problem — Wikipedia : the original problem explained clearly
-. CodeVault — Threads in C playlist : probably the most useful resource for this project
+
+. [man - pthread_create](https://man7.org/linux/man-pages/man3/pthread_create.3.html) : creating threads
+. [man - pthread_mutex_lock](https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3p.html) : locking and unlocking mutexes
+. [man - gettimeofday](https://man7.org/linux/man-pages/man2/gettimeofday.2.html) : getting the current time in microseconds
+. [man - usleep](https://man7.org/linux/man-pages/man3/usleep.3.html) : sleeping for microseconds
+. [Dining Philosophers Problem — Wikipedia](https://en.wikipedia.org/wiki/Dining_philosophers_problem) : the original problem explained clearly
+. [CodeVault — Threads in C playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2) : probably the most useful resource for this project
 
 # Notes
 I used AI a bit just to understand some concepts like data races and deadlocks.
